@@ -84,7 +84,7 @@ RULESPATH = $(LDDIR)
 LDSCRIPT = $(LDDIR)/userosc.ld
 DLIBS = -lm
 
-DADEFS = -DSTM32F401xC -DCORTEX_USE_FPU=TRUE -DARM_MATH_CM4 
+DADEFS = -DSTM32F401xC -DCORTEX_USE_FPU=TRUE -DARM_MATH_CM4
 DDEFS = -DSTM32F401xC -DSTM32F401xx \
     -DCORTEX_USE_FPU=TRUE -DARM_MATH_CM4 -D__FPU_PRESENT -D_USE_MATH_DEFINES -DM_PI=3.14159265358979323846 \
     -DOSC_$(OSCILLATOR_UC) -DOSCILLATOR_TYPE=$(OSCILLATOR) -DBLOCKSIZE=$(BLOCKSIZE)
@@ -99,7 +99,7 @@ LDOPT = -Xlinker --just-symbols=$(LDDIR)/osc_api.syms -Wl,--gc-sections
 CWARN = -W -Wall -Wextra
 CXXWARN =
 
-FPU_OPTS = -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant -fcheck-new 
+FPU_OPTS = -mfloat-abi=hard -mfpu=fpv4-sp-d16 -fsingle-precision-constant -fcheck-new
 
 OPT = -g -O3 -mlittle-endian
 OPT += $(FPU_OPTS)
@@ -248,7 +248,7 @@ clean:
 	@echo
 	@echo Done
 
-package:
+package: $(BUILDDIR)/$(PROJECT).bin
 	@echo Packaging to ./$(PKGARCH)
 	@mkdir -p $(PKGDIR)
 	@cat $(MANIFEST) | jq '.header.platform="$(PLATFORM)"|.header.version="$(VERSION)"' > $(PKGDIR)/manifest.json
