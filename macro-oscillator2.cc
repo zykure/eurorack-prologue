@@ -4,6 +4,8 @@
 #include "stmlib/utils/random.h"
 #include "plaits/dsp/dsp.h"
 #include "plaits/dsp/engine/engine.h"
+#include "utils/float_math.h"
+#include "utils/fixed_math.h"
 
 uint16_t p_values[6] = {0};
 float shape = 0, shiftshape = 0, shape_lfo = 0, lfo2 = 0, mix = 0;
@@ -56,6 +58,7 @@ inline float get_param_lfo2_depth() {
 }
 
 #ifdef OSC_VA
+#define HAS_OSC
 #include "plaits/dsp/engine/virtual_analog_engine.h"
 plaits::VirtualAnalogEngine engine;
 float out_gain = 0.8f, aux_gain = 0.8f;
@@ -68,6 +71,7 @@ void update_parameters() {
 #endif
 
 #ifdef OSC_WSH
+#define HAS_OSC
 #include "plaits/dsp/engine/waveshaping_engine.h"
 plaits::WaveshapingEngine engine;
 float out_gain = 0.7f, aux_gain = 0.6f;
@@ -80,6 +84,7 @@ void update_parameters() {
 #endif
 
 #ifdef OSC_FM
+#define HAS_OSC
 #include "plaits/dsp/engine/fm_engine.h"
 plaits::FMEngine engine;
 float out_gain = 0.6f, aux_gain = 0.6f;
@@ -92,6 +97,7 @@ void update_parameters() {
 #endif
 
 #ifdef OSC_GRN
+#define HAS_OSC
 #include "plaits/dsp/engine/grain_engine.h"
 plaits::GrainEngine engine;
 float out_gain = 0.7f, aux_gain = 0.6f;
@@ -104,6 +110,7 @@ void update_parameters() {
 #endif
 
 #ifdef OSC_ADD
+#define HAS_OSC
 #include "plaits/dsp/engine/additive_engine.h"
 plaits::AdditiveEngine engine;
 float out_gain = 0.8f, aux_gain = 0.8f;
@@ -116,6 +123,7 @@ void update_parameters() {
 #endif
 
 #if defined(OSC_WTA) || defined(OSC_WTB) || defined(OSC_WTC) || defined(OSC_WTD) || defined(OSC_WTE) || defined(OSC_WTF)
+#define HAS_OSC
 #include "plaits/dsp/engine/wavetable_engine.h"
 plaits::WavetableEngine engine;
 float out_gain = 0.6f, aux_gain = 0.6f;
@@ -128,6 +136,7 @@ void update_parameters() {
 #endif
 
 #if defined(OSC_STRING)
+#define HAS_OSC
 #define USE_LIMITER
 //float out_gain = 0.5f, aux_gain = 0.5f;
 #include "plaits/dsp/engine/string_engine.h"
@@ -141,6 +150,7 @@ void update_parameters() {
 #endif
 
 #if defined(OSC_MODAL)
+#define HAS_OSC
 #define USE_LIMITER
 #include "plaits/dsp/engine/modal_engine.h"
 plaits::ModalEngine engine;
@@ -152,7 +162,21 @@ void update_parameters() {
 }
 #endif
 
+#if defined(OSC_SPEECH)
+#define HAS_OSC
+#define USE_LIMITER
+#include "plaits/dsp/engine/speech_engine.h"
+plaits::SpeechEngine engine;
+void update_parameters() {
+    parameters.harmonics = get_shape();
+    parameters.timbre = get_param_id1();
+    parameters.morph = get_shift_shape();
+    parameters.accent = get_param_id2();
+}
+#endif
+
 #if defined(OSC_GRAIN)
+#define HAS_OSC
 //#define USE_LIMITER
 float out_gain = 0.5f, aux_gain = 0.5f;
 #include "plaits/dsp/engine/grain_engine.h"
@@ -166,6 +190,7 @@ void update_parameters() {
 #endif
 
 #if defined(OSC_NOISE)
+#define HAS_OSC
 //#define USE_LIMITER
 float out_gain = 0.5f, aux_gain = 0.5f;
 #include "plaits/dsp/engine/noise_engine.h"
@@ -179,6 +204,7 @@ void update_parameters() {
 #endif
 
 #if defined(OSC_DUST)
+#define HAS_OSC
 //#define USE_LIMITER
 float out_gain = 0.5f, aux_gain = 0.5f;
 #include "plaits/dsp/engine/particle_engine.h"
@@ -196,6 +222,7 @@ void update_parameters() {
 stmlib::Limiter limiter_;
 #endif
 
+#if defined(HAS_OSC)
 void OSC_INIT(uint32_t platform, uint32_t api)
 {
 #if defined(OSC_STRING)
@@ -298,3 +325,4 @@ void OSC_PARAM(uint16_t index, uint16_t value)
     break;
   }
 }
+#endif

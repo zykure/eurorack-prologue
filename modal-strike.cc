@@ -4,6 +4,8 @@
 #include "stmlib/utils/dsp.h"
 #include "elements/dsp/part.h"
 #include "elements/resources.h"
+#include "utils/float_math.h"
+#include "utils/fixed_math.h"
 
 using namespace elements;
 
