@@ -1,0 +1,21 @@
+{
+    "header" : 
+    {
+        "platform" : "prologue",
+        "module" : "osc",
+        "api" : "1.0-0",
+        "dev_id" : 0,
+        "prg_id" : 0,
+        "version" : "1.3-0",
+        "name" : "mo2vow",
+        "num_param" : 7,
+        "params" : [
+            ["Species",     0, 100,  "%"],
+            ["Intonation",  0, 100,  "%"],
+            ["LFO Target",  0, 7,     ""],
+            ["LFO2 Rate",   0, 100,  "%"],
+            ["LFO2 Int",    0, 100,  "%"],
+            ["LFO2 Target", 0, 5,     ""]
+        ]
+    }
+}

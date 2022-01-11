@@ -68,6 +68,37 @@ Tips
 ---
 Many parameters 'neutral' settings are in center position, such as `va` Detune or `fm` Feedback, however the prologue defaults all parameters to the lowest value, hence get used to going into the menus and set the first parameter to 50% when instantiating the oscillator.
 
+Speech synthesis (based on Plaits)
+====
+*Vowel and speech synthesis*
+
+| Name | Oscillator |
+|--|--|
+| `speech` | Phoneme (naive) and vowel (SAM) synthesis |
+
+Parameters
+----
+
+| Parameter               | Parameter             | LFO Target | Notes |
+|-------------------------|-----------------------|------------|-------|
+| `Shape` knob            | Phoneme               | 1 | Phoneme selection for naive synthesis.  |
+| `Shift` + `Shape` knob  | Vowel                 | 2 | Vowel selection for SAM synthesis. |
+| `Register` menu         | Vocal register        | 3 | Vocal register for naive synthesis.  |
+| `Formant` menu          | Formant shift         | 4 | Formant shift for SAM synthesis.  |
+| `Mix` menu              | Output mix            | 5 | Mix between naive and SAM synthesis output. |
+
+For more information please read the excellent [Mutable Instruments Plaits documentation](https://mutable-instruments.net/modules/plaits/manual/).
+
+Limitations
+-----
+Due to compute and memory (32K!) limitations in the prologue multi-engine quite a few short-cuts had to be taken:
+ 
+* The LPC speech synthesis module is not available.
+
+Tips
+---
+*...
+
 Modal Resonator (based on Elements)
 ====
 *Physical modeling synthesis*
