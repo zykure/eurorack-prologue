@@ -29,7 +29,7 @@ enum LfoTarget {
 };
 
 inline float get_lfo_value(enum LfoTarget target) {
-    return (p_values[k_user_osc_param_id3] == target ? shape_lfo : 0.0f);
+    return (p_values[k_user_osc_param_id4] == target ? shape_lfo : 0.0f);
 }
 
 inline float get_shape() {
