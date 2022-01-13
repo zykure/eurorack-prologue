@@ -178,7 +178,7 @@ void update_parameters() {
 #if defined(OSC_GRAIN)
 #define HAS_OSC
 //#define USE_LIMITER
-float out_gain = 0.5f, aux_gain = 0.5f;
+float out_gain = 0.7f, aux_gain = 0.3f;
 #include "plaits/dsp/engine/grain_engine.h"
 plaits::GrainEngine engine;
 void update_parameters() {
@@ -192,7 +192,7 @@ void update_parameters() {
 #if defined(OSC_NOISE)
 #define HAS_OSC
 //#define USE_LIMITER
-float out_gain = 0.5f, aux_gain = 0.5f;
+float out_gain = 0.7f, aux_gain = 0.7f;
 #include "plaits/dsp/engine/noise_engine.h"
 plaits::NoiseEngine engine;
 void update_parameters() {
@@ -206,7 +206,7 @@ void update_parameters() {
 #if defined(OSC_DUST)
 #define HAS_OSC
 //#define USE_LIMITER
-float out_gain = 0.5f, aux_gain = 0.5f;
+float out_gain = 0.7f, aux_gain = 0.6f;
 #include "plaits/dsp/engine/particle_engine.h"
 plaits::ParticleEngine engine;
 void update_parameters() {
