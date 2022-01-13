@@ -25,12 +25,12 @@ enum LfoTarget {
     LfoTargetShiftShape,
     LfoTargetParam1,
     LfoTargetParam2,
-    LfoTargetParam3,
+    LfoTargetPitch,
     LfoTargetAmplitude,
 };
 
 inline float get_lfo_value(enum LfoTarget target) {
-    return (p_values[k_user_osc_param_id4] == target ? shape_lfo : 0.0f);
+    return (p_values[k_user_osc_param_id2] == target ? shape_lfo : 0.0f);
 }
 
 inline float get_shape() {
@@ -40,13 +40,7 @@ inline float get_shift_shape() {
     return clip01f(shiftshape + get_lfo_value(LfoTargetShiftShape));
 }
 inline float get_param_id1() {
-    return clip01f((p_values[k_user_osc_param_id1] * 0.01f) + get_lfo_value(LfoTargetParam1));
-}
-inline float get_param_id2() {
-    return clip01f((p_values[k_user_osc_param_id2] * 0.01f) + get_lfo_value(LfoTargetParam2));
-}
-inline float get_param_id3() {
-    return clip01f((p_values[k_user_osc_param_id3] * 0.005f) + 0.5 + get_lfo_value(LfoTargetParam3));
+    return clip01f((p_values[k_user_osc_param_id1] * 0.005f) + get_lfo_value(LfoTargetParam1));
 }
 
 #if defined(USE_LIMITER)
@@ -56,14 +50,14 @@ stmlib::Limiter limiter_;
 plaits::NaiveSpeechSynth naive_speech_synth_;
 plaits::SAMSpeechSynth sam_speech_synth_;
 
-float* temp_buffer_[2];
+//float* temp_buffer_[2];
 
 void OSC_INIT(uint32_t platform, uint32_t api)
 {
-    stmlib::BufferAllocator allocator;
-    temp_buffer_[0] = allocator.Allocate<float>(plaits::kMaxBlockSize);
-    temp_buffer_[1] = allocator.Allocate<float>(plaits::kMaxBlockSize);
-    
+    //stmlib::BufferAllocator allocator;
+    //temp_buffer_[0] = allocator.Allocate<float>(plaits::kMaxBlockSize);
+    //temp_buffer_[1] = allocator.Allocate<float>(plaits::kMaxBlockSize);
+  
     sam_speech_synth_.Init();
     naive_speech_synth_.Init();
 
@@ -85,7 +79,7 @@ void OSC_NOTEOFF(const user_osc_param_t * const params)
 
 void OSC_CYCLE(const user_osc_param_t *const params, int32_t *yn, const uint32_t frames)
 {
-    static float out[plaits::kMaxBlockSize], aux[plaits::kMaxBlockSize];
+    static float out1[plaits::kMaxBlockSize], out2[plaits::kMaxBlockSize], aux[plaits::kMaxBlockSize];
     float* temp_buffer_[2];
 
     shape_lfo = q31_to_f32(params->shape_lfo);
@@ -100,11 +94,9 @@ void OSC_CYCLE(const user_osc_param_t *const params, int32_t *yn, const uint32_t
     }
     previous_gate = gate;
     
-    parameters.harmonics = get_shift_shape();
-    parameters.timbre = get_param_id1();
+    parameters.timbre = get_shift_shape();
     parameters.morph = get_shape();
-    parameters.accent = get_param_id2();
-    mix = get_param_id3();
+    mix = get_param_id1();
     
     const float f0 = plaits::NoteToFrequency(parameters.note);
     
@@ -113,31 +105,39 @@ void OSC_CYCLE(const user_osc_param_t *const params, int32_t *yn, const uint32_t
         f0,
         parameters.morph,
         parameters.timbre,
-        temp_buffer_[0],
+        nullptr,
         aux,
-        out,
+        out1,
         plaits::kMaxBlockSize);
     
     sam_speech_synth_.Render(
         parameters.trigger == plaits::TRIGGER_RISING_EDGE,
         f0,
-        parameters.harmonics,
-        parameters.accent,
-        temp_buffer_[0],
-        temp_buffer_[1],
+        parameters.morph,
+        parameters.timbre,
+        aux,
+        out2,
         plaits::kMaxBlockSize);
-    
+
+#if 0    
     for (size_t i = 0; i < plaits::kMaxBlockSize; ++i) {
         aux[i] += (temp_buffer_[0][i] - aux[i]) * mix;
         out[i] += (temp_buffer_[1][i] - out[i]) * mix;
     }
     
-    #if defined(USE_LIMITER)
-    limiter_.Process(1.0, out, plaits::kMaxBlockSize);
-    #endif
     for(size_t i=0;i<plaits::kMaxBlockSize;i++) {
         yn[i] = f32_to_q31(out[i]);
     }
+#else
+    #if defined(USE_LIMITER)
+    limiter_.Process(1.0, out1, plaits::kMaxBlockSize);
+    limiter_.Process(1.0, out2, plaits::kMaxBlockSize);
+    #endif
+    
+    for(size_t i=0;i<plaits::kMaxBlockSize;i++) {
+        yn[i] = f32_to_q31(stmlib::Crossfade(out1[i], out2[i], mix));
+    }
+#endif
 }
 
 void OSC_PARAM(uint16_t index, uint16_t value)
