@@ -25,7 +25,8 @@ enum LfoTarget {
     LfoTargetShiftShape,
     LfoTargetParam1,
     LfoTargetParam2,
-    LfoTargetParam3
+    LfoTargetParam3,
+    LfoTargetAmplitude,
 };
 
 inline float get_lfo_value(enum LfoTarget target) {
@@ -45,7 +46,7 @@ inline float get_param_id2() {
     return clip01f((p_values[k_user_osc_param_id2] * 0.01f) + get_lfo_value(LfoTargetParam2));
 }
 inline float get_param_id3() {
-    return clip01f((p_values[k_user_osc_param_id3] * 0.01f) + get_lfo_value(LfoTargetParam3));
+    return clip01f((p_values[k_user_osc_param_id3] * 0.005f) + 0.5 + get_lfo_value(LfoTargetParam3));
 }
 
 #if defined(USE_LIMITER)
