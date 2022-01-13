@@ -61,7 +61,7 @@ header = """// Copyright 2013 Olivier Gillet.
 """
 
 namespace = 'tides'
-target = 'tides-data'
+target = 'tides_data'
 includes = """
 #include "stmlib/stmlib.h"
 """

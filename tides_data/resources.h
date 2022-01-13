@@ -30,8 +30,8 @@
 // make resources
 
 
-#ifndef TIDES-DATA_RESOURCES_H_
-#define TIDES-DATA_RESOURCES_H_
+#ifndef TIDES_DATA_RESOURCES_H_
+#define TIDES_DATA_RESOURCES_H_
 
 
 #include "stmlib/stmlib.h"
@@ -115,4 +115,4 @@ extern const int16_t ws_smooth_bipolar_fold[] IN_RAM;
 
 }  // namespace tides
 
-#endif  // TIDES-DATA_RESOURCES_H_
+#endif  // TIDES_DATA_RESOURCES_H_

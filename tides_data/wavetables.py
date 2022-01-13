@@ -243,7 +243,7 @@ bank_2 += make_family(sine_power, xrange(8))
 
 # Bank 3: Shruthi.
 bank_3 = list(numpy.fromstring(
-    file('tides-data/waves.bin', 'rb').read(), numpy.int16))
+    file('tides_data/waves.bin', 'rb').read(), numpy.int16))
 
 wavetables.append(('waves', make_bank(bank_1) + make_bank(bank_2) + bank_3[:50*257]))
 

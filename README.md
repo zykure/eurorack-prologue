@@ -3,7 +3,9 @@ Eurorack Oscillators for Korg prologue, minilogue xd and Nu:tekt NTS-1
 
 Ports of some of Mutable Instruments (tm) oscillators to the Korg "logue" multi-engine.
 
-See [releases](https://github.com/peterall/eurorack-prologue/releases) for latest binaries.
+Based on the original work by Peter Allwin at [GitHub](https://github.com/peterall/eurorack-prologue).
+
+See [releases](https://github.com/zykure/eurorack-prologue/releases) for latest binaries.
 
 
 Macro Oscillator 2 (based on Plaits)
@@ -52,14 +54,14 @@ The oscillator has a built-in additional cosine key-synced LFO which can module 
 
 | LFO Target | Parameter     | Notes |
 |------------|---------------|-------|
-| 1          | `Shape`       |       |
-| 2          | `Shift-shape` |       |
-| 3          | `Parameter 1` | Not implemented for Wavetable oscillator |
-| 4          | `Parameter 2` |       |
-| 5          | `Pitch` |       |
-| 6          | _reserved_ (Amplitude?) |       |
-| 7          | `LFO2 Rate` |       |
-| 8          | `LFO2 Int` |       |
+| 0          | `Shape`       |       |
+| 1          | `Shift-shape` |       |
+| 2          | `Parameter 1` | Not implemented for Wavetable oscillator |
+| 3          | `Parameter 2` |       |
+| 4          | `Pitch` |       |
+| 5          | _reserved_ (Amplitude?) |       |
+| 6          | `LFO2 Rate` |       |
+| 7          | `LFO2 Int` |       |
 
 
 For more information please read the excellent [Mutable Instruments Plaits documentation](https://mutable-instruments.net/modules/plaits/manual/).
@@ -81,11 +83,42 @@ Parameters
 
 | Parameter               | Parameter             | LFO Target | Notes |
 |-------------------------|-----------------------|------------|-------|
-| `Shape` knob            | Phoneme               | 1 | Phoneme selection for naive synthesis.  |
-| `Shift` + `Shape` knob  | Vowel                 | 2 | Vowel selection for SAM synthesis. |
-| `Register` menu         | Vocal register        | 3 | Vocal register for naive synthesis.  |
-| `Formant` menu          | Formant shift         | 4 | Formant shift for SAM synthesis.  |
-| `Mix` menu              | Output mix            | 5 | Mix between naive and SAM synthesis output. |
+| `Shape` knob            | Phoneme               | 0 | Phoneme selection for naive synthesis.  |
+| `Shift` + `Shape` knob  | Vowel                 | 1 | Vowel selection for SAM synthesis. |
+| `Register` menu         | Vocal register        | 2 | Vocal register for naive synthesis.  |
+| `Formant` menu          | Formant shift         | 3 | Formant shift for SAM synthesis.  |
+| `Mix` menu              | Output mix            | 4 | Mix between naive and SAM synthesis output. |
+
+For more information please read the excellent [Mutable Instruments Plaits documentation](https://mutable-instruments.net/modules/plaits/manual/).
+
+Limitations
+-----
+Due to compute and memory (32K!) limitations in the prologue multi-engine quite a few short-cuts had to be taken:
+ 
+* The LPC speech synthesis module is not available.
+
+Tips
+---
+*...
+
+Tidal Modulator (based on Tides)
+====
+*Vowel and speech synthesis*
+
+| Name | Oscillator |
+|--|--|
+| `tidal` | Phoneme (naive) and vowel (SAM) synthesis |
+
+Parameters
+----
+
+| Parameter               | Parameter             | LFO Target | Notes |
+|-------------------------|-----------------------|------------|-------|
+| `Shape` knob            | Shape                 | 0 | Waveform shape.  |
+| `Shift` + `Shape` knob  | Slope                 | 1 | Waveform slope. |
+| `Smoothness` menu       | Smoothness            | 2 | Waveform smoothness.  |
+|                         | _unused_              | 3 |   |
+|                         | Pitch                 | 4 |   |
 
 For more information please read the excellent [Mutable Instruments Plaits documentation](https://mutable-instruments.net/modules/plaits/manual/).
 

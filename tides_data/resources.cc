@@ -30,7 +30,7 @@
 // make resources
 
 
-#include "tides-data/resources.h"
+#include "tides_data/resources.h"
 
 namespace tides {
 
