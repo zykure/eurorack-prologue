@@ -25,9 +25,9 @@ Macro Oscillator 2 (based on Plaits)
 | `mo2_wte`* | Wavetable: Braids (male, choir, digi, drone) | Row index | Column index |
 | `mo2_wtf`* | Wavetable: Braids (metal, fant, 2x unknown) | Row index | Column index |
 | `mo2_string` | Inharmonic string model | Decay | Brightness |
-| `mo2_grain` | Granular cloud | Density | Randomization |
-| `mo2_noise` | Filtered noise | Filter response | Filter resonance |
-| `mo2_dust` | Particle noise | Density | Randomization |
+| `mo2_nse` | Filtered noise | Filter response | Filter resonance |
+| `mo2_cld` | Granular cloud | Density | Randomization |
+| `mo2_dst` | Particle noise | Density | Randomization |
 
 \* Due to the 32k size constraint in the multi-engine the Wavetable oscillator is split into 6 oscillators of 8 rows (scannable by Shape) by 4 columns (scannable by Shift-shape)
 
