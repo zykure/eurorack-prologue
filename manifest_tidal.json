@@ -10,7 +10,7 @@
         "name" : "tidal",
         "num_param" : 2,
         "params" : [
-            ["Smoothness",  0, 100,  "%"],
+            ["Smoothness",  -100, 100,  "%"],
             ["LFO Target",  0, 5,     ""]
         ]
     }
