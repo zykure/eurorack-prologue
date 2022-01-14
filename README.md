@@ -8,6 +8,8 @@ Based on the original work by Peter Allwin at [GitHub](https://github.com/petera
 See [releases](https://github.com/zykure/eurorack-prologue/releases) for latest binaries.
 
 
+
+
 Macro Oscillator 2 (based on Plaits)
 ====
 -----
@@ -197,12 +199,14 @@ Issues
 Building
 ====
 
+For Linux-specific instructions, see (README_linux.md)[README_linux.md]
+
 * Checkout the repo (including subrepos)
 * Follow the toolchain installation instructions in the `logue-sdk`
 * Make sure you have the `jq` tool installed (`brew install jq`)
 * Build with `make`
 
-(only tested on MacOSX)
+(tested on MacOSX and Linux)
 
 Acknowledgements
 ====
