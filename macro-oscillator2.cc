@@ -178,13 +178,13 @@ void update_parameters() {
 #if defined(OSC_GRAIN)
 #define HAS_OSC
 //#define USE_LIMITER
-float out_gain = 0.7f, aux_gain = 0.3f;
+float out_gain = 0.7f, aux_gain = 0.5f;
 #include "plaits/dsp/engine/grain_engine.h"
 plaits::GrainEngine engine;
 void update_parameters() {
-  parameters.harmonics = get_shift_shape();
-  parameters.timbre = get_shape();
-  parameters.morph = get_param_id1();
+  parameters.harmonics = get_param_id1();
+  parameters.timbre = get_shift_shape();
+  parameters.morph = get_shape();
   mix = get_param_id2();
 }
 #endif
@@ -192,13 +192,13 @@ void update_parameters() {
 #if defined(OSC_NOISE)
 #define HAS_OSC
 //#define USE_LIMITER
-float out_gain = 0.7f, aux_gain = 0.7f;
+float out_gain = 1.0f, aux_gain = 0.7f;
 #include "plaits/dsp/engine/noise_engine.h"
 plaits::NoiseEngine engine;
 void update_parameters() {
   parameters.harmonics = get_shape();
-  parameters.timbre = get_param_id1();
-  parameters.morph = get_shift_shape();
+  parameters.timbre = get_shift_shape();
+  parameters.morph = get_param_id1();
   mix = get_param_id2();
 }
 #endif
@@ -206,13 +206,13 @@ void update_parameters() {
 #if defined(OSC_DUST)
 #define HAS_OSC
 //#define USE_LIMITER
-float out_gain = 0.7f, aux_gain = 0.6f;
+float out_gain = 0.5f, aux_gain = 0.6f;
 #include "plaits/dsp/engine/particle_engine.h"
 plaits::ParticleEngine engine;
 void update_parameters() {
-  parameters.harmonics = get_shift_shape();
-  parameters.timbre = get_shape();
-  parameters.morph = get_param_id1();
+  parameters.harmonics = get_param_id1();
+  parameters.timbre = get_shift_shape();
+  parameters.morph = get_shape();
   mix = get_param_id2();
 }
 #endif
@@ -244,10 +244,11 @@ void OSC_INIT(uint32_t platform, uint32_t api)
   stmlib::BufferAllocator allocator;
   allocator.Init(engine_buffer, sizeof(engine_buffer));
   engine.Init(&allocator);
+  
   lfo.InitApproximate(0);
   lfo.Start();
 
-  p_values[0] = 100;
+  //p_values[0] = 100;
 }
 
 void OSC_NOTEON(const user_osc_param_t * const params)

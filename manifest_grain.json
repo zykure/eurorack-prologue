@@ -10,7 +10,7 @@
         "name" : "mo2cld",
         "num_param" : 6,
         "params" : [
-            ["Duration",    -100, 100,  "%"],
+            ["Randomization", -100, 100,  "%"],
             ["Sine Wave",   0, 100,  "%"],
             ["LFO Target",  0, 7,     ""],
             ["LFO2 Rate",   0, 100,  "%"],

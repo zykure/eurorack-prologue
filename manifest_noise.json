@@ -10,7 +10,7 @@
         "name" : "mo2nse",
         "num_param" : 6,
         "params" : [
-            ["Clock Freq",  -100, 100,  "%"],
+            ["Resonance",  -100, 100,  "%"],
             ["2Band Filter", 0, 100,  "%"],
             ["LFO Target",  0, 7,     ""],
             ["LFO2 Rate",   0, 100,  "%"],
