@@ -1,19 +1,41 @@
-TOPTARGETS := all clean
+TOPTARGETS := package clean
 
-OSCILLATORS := $(wildcard *mk)
+OSCILLATORS := $(wildcard osc_*mk)
+#OSCILLATORS := osc_add.mk
 
-VERSION=1.6-1
+VERSION=1.7-1
+
+# ** Mutable Instruments that support Cortex-M4:
+# 	braids
+# 	clouds
+# 	elements
+# 	frames
+# 	marbles
+# 	peaks
+# 	plaits
+# 	rings
+# 	stages
+# 	stmlib
+# 	streams
+# 	tides
+# 	warps
+# 	yarns
+
+
+all:
+	make -j1 package
 
 $(TOPTARGETS): $(OSCILLATORS) package_prologue package_minilogue-xd package_nutekt-digital
+
 $(OSCILLATORS):
 	@rm -fR .dep ./build
-	@PLATFORM=prologue VERSION=$(VERSION) $(MAKE) -f $@ $(MAKECMDGOALS)
+	PLATFORM=prologue VERSION=$(VERSION) $(MAKE) -f $@ $(MAKECMDGOALS)
 	@rm -fR .dep ./build
-	@PLATFORM=minilogue-xd VERSION=$(VERSION) $(MAKE) -f $@ $(MAKECMDGOALS)
+	PLATFORM=minilogue-xd VERSION=$(VERSION) $(MAKE) -f $@ $(MAKECMDGOALS)
 	@rm -fR .dep ./build
-	@PLATFORM=nutekt-digital VERSION=$(VERSION) $(MAKE) -f $@ $(MAKECMDGOALS)
+	PLATFORM=nutekt-digital VERSION=$(VERSION) $(MAKE) -f $@ $(MAKECMDGOALS)
 
-.PHONY: $(TOPTARGETS) $(OSCILLATORS)
+.PHONY: all $(TOPTARGETS) $(OSCILLATORS)
 
 PROLOGUE_PACKAGE=eurorack_prologue
 MINILOGUE_XD_PACKAGE=eurorack_minilogue-xd
