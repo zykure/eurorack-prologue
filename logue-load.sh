@@ -1,5 +1,4 @@
 #!/bin/sh
-set -e
 
 if [ "x$1" == "x" ]; then
     echo "Usage: $0 -s <SLOT> -u <FILE> [...]"
@@ -23,6 +22,6 @@ echo "Created file: $temp_file"
 tail -n1 $temp_file| sed 's/,//g' | sed 's/}//g' | sed 's/{//g' | sed 's/>//g' | sed 's/^ *//g' > "$temp_file.sysex"
 echo "Created file: $temp_file.sysex"
 
-amidi -p $amidi_port -S `cat $temp_file.sysex`
+amidi -p $amidi_port -S `cat $temp_file.sysex` || exit $0
 echo "MIDI transfer successful"
 
