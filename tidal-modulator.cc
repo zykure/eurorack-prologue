@@ -49,7 +49,7 @@ void OSC_INIT(uint32_t platform, uint32_t api)
     #endif
 
     generator.Init();
-    generator.set_sync(true);
+    generator.set_sync(false);
     generator.set_range(tides::GENERATOR_RANGE_HIGH);
     generator.set_mode(tides::GENERATOR_MODE_LOOPING);
 }
@@ -90,7 +90,6 @@ void OSC_CYCLE(const user_osc_param_t *const params, int32_t *yn, const uint32_t
 
     for(uint32_t i = 0; i < tides::kBlockSize; ++i) {
         const tides::GeneratorSample& sample = generator.Process(0);
-        //out[i] = sample.bipolar * (2 << 16);
         out[i] = q15_to_f32(sample.bipolar);
     }
 
