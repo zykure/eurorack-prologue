@@ -8,7 +8,7 @@
         "prg_id" : 0,
         "version" : "1.3-0",
         "name" : "tidal",
-        "num_param" : 3,
+        "num_param" : 2,
         "params" : [
             ["Smoothness",  0, 100,  "%"],
             ["LFO Target",  0, 5,     ""]
