@@ -96,7 +96,7 @@ For more information please read the excellent [Mutable Instruments Plaits docum
 Limitations
 -----
 Due to compute and memory (32K!) limitations in the prologue multi-engine quite a few short-cuts had to be taken:
- 
+
 * The LPC speech synthesis module is not available.
 
 Tips
@@ -105,11 +105,11 @@ Tips
 
 Tidal Modulator (based on Tides)
 ====
-*Vowel and speech synthesis*
+*Waveform generator*
 
 | Name | Oscillator |
 |--|--|
-| `tidal` | Phoneme (naive) and vowel (SAM) synthesis |
+| `tidal` | Looping waveform generator |
 
 Parameters
 ----
@@ -122,13 +122,14 @@ Parameters
 |                         | _unused_              | 3 |   |
 |                         | Pitch                 | 4 |   |
 
-For more information please read the excellent [Mutable Instruments Plaits documentation](https://mutable-instruments.net/modules/plaits/manual/).
+For more information please read the excellent [Mutable Instruments Tides documentation](https://mutable-instruments.net/modules/tides/manual/).
 
 Limitations
 -----
 Due to compute and memory (32K!) limitations in the prologue multi-engine quite a few short-cuts had to be taken:
- 
-* The LPC speech synthesis module is not available.
+
+* The waveforms are stored with reduced resolution (see `tides_data` directory)
+
 
 Tips
 ---
