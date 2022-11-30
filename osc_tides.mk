@@ -1,4 +1,4 @@
-OSCILLATOR = tidal
+OSCILLATOR = tides
 PROJECT = $(OSCILLATOR)
 
 UCXXSRC = tidal-modulator.cc \
@@ -7,7 +7,7 @@ UCXXSRC = tidal-modulator.cc \
 	eurorack/stmlib/dsp/units.cc
 
 UINCDIR = tides_data
-	
+
 include makefile.inc
 
 # Resources need to be re-generated from Tides module in order to save memory

@@ -1,9 +1,9 @@
-OSCILLATOR = dust
+OSCILLATOR = cld
 PROJECT = mo2_$(OSCILLATOR)
 
 UCXXSRC = macro-oscillator2.cc \
-	eurorack/plaits/dsp/engine/particle_engine.cc \
-    eurorack/stmlib/utils/random.cc \
+	eurorack/plaits/dsp/engine/grain_engine.cc \
+    eurorack/plaits/resources.cc \
 	eurorack/stmlib/dsp/units.cc
 
 include makefile.inc

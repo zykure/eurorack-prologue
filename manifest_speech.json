@@ -7,15 +7,16 @@
         "dev_id" : 0,
         "prg_id" : 0,
         "version" : "1.3-0",
-        "name" : "mo2vow",
-        "num_param" : 7,
+        "name" : "speech",
+        "num_param" : 6,
         "params" : [
-            ["Species",     0, 100,  "%"],
-            ["Intonation",  0, 100,  "%"],
+            ["Blend",    -100, 100,  "%"],
+            ["Raw Mix",     0, 100,  "%"],
             ["LFO Target",  0, 7,     ""],
             ["LFO2 Rate",   0, 100,  "%"],
             ["LFO2 Int",    0, 100,  "%"],
             ["LFO2 Target", 0, 5,     ""]
+
         ]
     }
 }

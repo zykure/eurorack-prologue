@@ -1,7 +1,7 @@
 TOPTARGETS := package clean
 
 OSCILLATORS := $(wildcard osc_*mk)
-#OSCILLATORS := osc_tidal.mk
+#OSCILLATORS := osc_tides.mk
 
 VERSION=1.7-1
 

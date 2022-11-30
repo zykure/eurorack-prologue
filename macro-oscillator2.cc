@@ -175,7 +175,7 @@ void update_parameters() {
 }
 #endif
 
-#if defined(OSC_GRAIN)
+#if defined(OSC_CLD)
 #define HAS_OSC
 //#define USE_LIMITER
 float out_gain = 0.7f, aux_gain = 0.5f;
@@ -189,7 +189,7 @@ void update_parameters() {
 }
 #endif
 
-#if defined(OSC_NOISE)
+#if defined(OSC_NSE)
 #define HAS_OSC
 //#define USE_LIMITER
 float out_gain = 1.0f, aux_gain = 0.7f;
@@ -203,7 +203,7 @@ void update_parameters() {
 }
 #endif
 
-#if defined(OSC_DUST)
+#if defined(OSC_DST)
 #define HAS_OSC
 //#define USE_LIMITER
 float out_gain = 0.5f, aux_gain = 0.6f;
@@ -244,7 +244,7 @@ void OSC_INIT(uint32_t platform, uint32_t api)
   stmlib::BufferAllocator allocator;
   allocator.Init(engine_buffer, sizeof(engine_buffer));
   engine.Init(&allocator);
-  
+
   lfo.InitApproximate(0);
   lfo.Start();
 

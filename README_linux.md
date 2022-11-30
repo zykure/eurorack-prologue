@@ -50,7 +50,7 @@ Building on Linux
 
    Note: Make sure that no applications is blocking the MIDI ports on your system. You can check this e.g. with the `fuser -fv /dev/snd/*` command.
 
-6. The `logue-cli` program sometimes fails to transfer data to the device. This typically results in a message
+6. The `logue-cli` program sometimes fails to transfer data to the device on Linux. This typically results in a message
 
     ```
     MidiOutAlsa::sendMessage: error sending MIDI message to port.
@@ -63,3 +63,5 @@ Building on Linux
     ```
 
     Note that the script automatically detects the correct device port, but this should be checked before transferring SysEx files.
+
+    Fort details on this issue, see https://github.com/korginc/logue-sdk/issues/37
