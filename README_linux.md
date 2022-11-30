@@ -49,3 +49,17 @@ Building on Linux
    In some cases it also helps to increase the MIDI buffer size: `echo "65536" | sudo tee /sys/module/snd_seq_midi/parameters/output_buffer_size`
 
    Note: Make sure that no applications is blocking the MIDI ports on your system. You can check this e.g. with the `fuser -fv /dev/snd/*` command.
+
+6. The `logue-cli` program sometimes fails to transfer data to the device. This typically results in a message
+
+    ```
+    MidiOutAlsa::sendMessage: error sending MIDI message to port.
+    ```
+
+    To circumvent the issue, one can use the `logue-cli` program to create a SysEx file which can then be transferred manually. The script `logue-load.sh` takes care of the necessary steps:
+
+    ```
+   ./logue-load.sh -s0 -u <FILE>  # uploads to 1st slot on device 2
+    ```
+
+    Note that the script automatically detects the correct device port, but this should be checked before transferring SysEx files.
